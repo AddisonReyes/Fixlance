@@ -1,7 +1,7 @@
 services:
-  mongodb:
+  fixlance-mongodb:
     image: mongo:7.0.25
-    container_name: mongodb
+    container_name: fixlance-mongodb
     restart: always
     ports:
       - "27017:27017"
