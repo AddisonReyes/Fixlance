@@ -14,7 +14,7 @@ router.get(url + "/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     if (!Types.ObjectId.isValid(id!)) {
-      return res.status(400).json({ message: "Invalid ID" });
+      return res.status(400).json({ message: "Invalid ID." });
     }
 
     const technician = await Technician.findById(id);
@@ -22,7 +22,7 @@ router.get(url + "/:id", async (req: Request, res: Response) => {
   } catch (error) {
     const errorMessage = (error as unknown as Error).message;
     res.status(400).json({
-      message: "Error finding the technician",
+      message: "Error finding the technician.",
       error: env === "dev" ? errorMessage : undefined,
     });
   }
@@ -36,7 +36,7 @@ router.get(url, async (req: Request, res: Response) => {
   } catch (error) {
     const errorMessage = (error as unknown as Error).message;
     res.status(400).json({
-      message: "Error fetching technicians",
+      message: "Error fetching technicians.",
       error: env === "dev" ? errorMessage : undefined,
     });
   }
@@ -47,7 +47,7 @@ router.put(url + "/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     if (!Types.ObjectId.isValid(id!)) {
-      return res.status(400).json({ message: "Invalid ID" });
+      return res.status(400).json({ message: "Invalid ID." });
     }
 
     await Technician.updateOne({ _id: id! }, req.body);
@@ -55,7 +55,7 @@ router.put(url + "/:id", async (req: Request, res: Response) => {
   } catch (error) {
     const errorMessage = (error as unknown as Error).message;
     res.status(400).json({
-      message: "Error updating the technician",
+      message: "Error updating the technician.",
       error: env === "dev" ? errorMessage : undefined,
     });
   }
@@ -66,7 +66,7 @@ router.delete(url + "/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     if (!Types.ObjectId.isValid(id!)) {
-      return res.status(400).json({ message: "Invalid ID" });
+      return res.status(400).json({ message: "Invalid ID." });
     }
 
     await Technician.deleteOne({ _id: id! });
@@ -74,7 +74,7 @@ router.delete(url + "/:id", async (req: Request, res: Response) => {
   } catch (error) {
     const errorMessage = (error as unknown as Error).message;
     res.status(400).json({
-      message: "Error updating the technician",
+      message: "Error updating the technician.",
       error: env === "dev" ? errorMessage : undefined,
     });
   }
