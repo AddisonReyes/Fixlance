@@ -2,14 +2,12 @@
   "name": "@fixlance/core",
   "author": "Addison Reyes",
   "license": "MIT",
-  "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "version": "1.0.3",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc"
   },
-  "keywords": [],
-  "type": "module",
   "dependencies": {
     "@types/mongoose": "^5.11.96",
     "mongoose": "^9.0.0",

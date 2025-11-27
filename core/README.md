@@ -58,3 +58,9 @@ Unpublish package
 ```
 npm unpublish @fixlance/core@1.0.1 --force --registry http://localhost:4873/
 ```
+
+## Install package
+
+```
+npm install @fixlance/core --registry http://localhost:4873/
+```

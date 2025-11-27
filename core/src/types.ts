@@ -1,5 +1,14 @@
 import { Document } from "mongoose";
 
+export type role = "client" | "technician";
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  role: role;
+  createdAt: Date;
+}
+
 export interface ITechnician extends Document {
   userId: string;
   categories: string[];
@@ -8,16 +17,6 @@ export interface ITechnician extends Document {
   location: string;
   photo: string;
   rating: number;
-}
-
-export type role = "client" | "technician";
-export interface IUser extends Document {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  role: role;
-  createdAt: Date;
 }
 
 export type status = "pending" | "accepted" | "completed" | "cancelled";
