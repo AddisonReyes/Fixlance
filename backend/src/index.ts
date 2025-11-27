@@ -1,8 +1,13 @@
 import express, { Request, Response, NextFunction } from "express";
-import errors from "./middlewares/errors.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+
+import techniciansRouter from "./routes/technicians.js";
+import requestsRouter from "./routes/requests.js";
+import reviewsRouter from "./routes/reviews.js";
+import usersRouter from "./routes/users.js";
+import errors from "./middlewares/errors.js";
 
 dotenv.config();
 
@@ -35,6 +40,11 @@ app.use(
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Hiii! :3" });
 });
+
+app.use("/api", techniciansRouter);
+app.use("/api", requestsRouter);
+app.use("/api", reviewsRouter);
+app.use("/api", usersRouter);
 
 app.use(errors);
 
