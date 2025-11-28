@@ -72,8 +72,28 @@ router.post(url + "/login", async (req: Request, res: Response) => {
 });
 
 //GET /api/users/me - Authenticated user's profile
-router.get("users/me", (req: Request, res: Response) => {
+router.get("/users/me", (req: Request, res: Response) => {
   res.status(200).json({ message: "me", status: 200 });
+});
+
+//GET /api/users - Users list
+router.get("/users", async (req: Request, res: Response) => {
+  try {
+    if (env === "dev") {
+      const users = await User.find();
+      res.status(200).send(users);
+    } else {
+      res.status(400).json({
+        message: "Sorry sir you can't use this.",
+      });
+    }
+  } catch (error) {
+    const errorMessage = (error as unknown as Error).message;
+    res.status(400).json({
+      message: "Error fetching users.",
+      error: env === "dev" ? errorMessage : undefined,
+    });
+  }
 });
 
 export default router;

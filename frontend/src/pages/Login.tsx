@@ -1,4 +1,6 @@
+import { authService } from "../services/authService";
 import React, { useState, ChangeEvent } from "react";
+import { role } from "@fixlance/core";
 import "./login.css";
 
 function Login() {
@@ -10,8 +12,39 @@ function Login() {
     role: "client",
   });
 
-  const handleSubmit = () => {
-    console.log("Form submitted:", formData);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    setError("");
+    setLoading(true);
+
+    try {
+      if (isLogin) {
+        const response = await authService.login({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        localStorage.setItem("token", response.data.token);
+        console.log("Login successful:", response);
+      } else {
+        const response = await authService.register({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role: formData.role as role,
+        });
+
+        localStorage.setItem("token", response.data.token);
+        console.log("Register successful:", response);
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.message || "An error occurred");
+      console.error("Error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +77,8 @@ function Login() {
               Register
             </button>
           </div>
+
+          {error && <div className="error-message">{error}</div>}
 
           <div>
             {!isLogin && (
@@ -117,8 +152,12 @@ function Login() {
               </div>
             )}
 
-            <button onClick={handleSubmit} className="submit-button">
-              {isLogin ? "Login" : "Register"}
+            <button
+              onClick={handleSubmit}
+              className="submit-button"
+              disabled={loading}
+            >
+              {loading ? "Loading..." : isLogin ? "Login" : "Register"}
             </button>
           </div>
         </div>

@@ -11,6 +11,7 @@ import errors from "./middlewares/errors.js";
 
 dotenv.config();
 
+let frontend: string = process.env.FRONTEND_PORT || "3001";
 const env: string = process.env.NODE_ENV || "dev";
 let port: string = process.env.PORT || "3000";
 
@@ -32,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
-    origin: env === "dev" ? `http://localhost:${port}` : process.env.URL,
+    origin: env === "dev" ? `http://localhost:${frontend}` : process.env.URL,
   })
 );
 
